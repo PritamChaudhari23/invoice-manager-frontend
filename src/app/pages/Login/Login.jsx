@@ -10,20 +10,27 @@ import {
 } from "@mui/material";
 import AccountCircle from "@mui/icons-material/AccountCircle";
 import Lock from "@mui/icons-material/Lock";
+import { login } from "../../../network/userapi";
 
 const Login = () => {
-  const [form, setForm] = useState({
+  const initialState = {
     username: "",
     password: "",
-  });
-
-  const handleChange = (e) => {
-    setForm({ ...form, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    // Add login logic here
+  const [userCredentials, setUserCredentials] = useState(initialState);
+
+  const handleFormSubmit = (event) => {
+    event.preventDefault();
+    console.log(
+      `USERNAME: ${userCredentials.username} & Password: ${userCredentials.password}`
+    );
+    login(userCredentials);
+  };
+
+  const handleInputChange = (event) => {
+    const { name, value } = event.target;
+    setUserCredentials({ ...userCredentials, [name]: value });
   };
 
   return (
@@ -61,16 +68,16 @@ const Login = () => {
         >
           Please login to your account
         </Typography>
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleFormSubmit}>
           <TextField
             label="Username"
             name="username"
-            value={form.username}
-            onChange={handleChange}
+            value={userCredentials.username}
+            onChange={handleInputChange}
             fullWidth
             margin="normal"
             required
-            InputProps={{
+            inputAdornment={{
               startAdornment: (
                 <InputAdornment position="start">
                   <AccountCircle color="action" />
@@ -82,12 +89,12 @@ const Login = () => {
             label="Password"
             name="password"
             type="password"
-            value={form.password}
-            onChange={handleChange}
+            value={userCredentials.password}
+            onChange={handleInputChange}
             fullWidth
             margin="normal"
             required
-            InputProps={{
+            inputAdornment={{
               startAdornment: (
                 <InputAdornment position="start">
                   <Lock color="action" />

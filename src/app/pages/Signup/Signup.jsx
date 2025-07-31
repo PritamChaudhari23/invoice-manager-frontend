@@ -12,24 +12,28 @@ import Person from "@mui/icons-material/Person";
 import Email from "@mui/icons-material/Email";
 import AccountCircle from "@mui/icons-material/AccountCircle";
 import Lock from "@mui/icons-material/Lock";
+import { signup } from "../../../network/userapi";
 
 const Signup = () => {
-  const [form, setForm] = useState({
+  const initialState = {
     name: "",
     surname: "",
     email: "",
     username: "",
     password: "",
     confirmPassword: "",
-  });
+  };
+  const [userData, setUserData] = useState(initialState);
 
-  const handleChange = (e) => {
-    setForm({ ...form, [e.target.name]: e.target.value });
+  const handleInputChange = (event) => {
+    const { name, value } = event.target;
+    setUserData({ ...userData, [name]: value });
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    // Add signup logic here
+  const handleFormSubmit = (event) => {
+    event.preventDefault();
+    console.log(userData);
+    signup(userData);
   };
 
   return (
@@ -67,16 +71,16 @@ const Signup = () => {
         >
           Please fill in the details to sign up
         </Typography>
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleFormSubmit}>
           <TextField
             label="Name"
             name="name"
-            value={form.name}
-            onChange={handleChange}
+            value={userData.name}
+            onChange={handleInputChange}
             fullWidth
             margin="normal"
             required
-            InputProps={{
+            inputAdornment={{
               startAdornment: (
                 <InputAdornment position="start">
                   <Person color="action" />
@@ -87,12 +91,12 @@ const Signup = () => {
           <TextField
             label="Surname"
             name="surname"
-            value={form.surname}
-            onChange={handleChange}
+            value={userData.surname}
+            onChange={handleInputChange}
             fullWidth
             margin="normal"
             required
-            InputProps={{
+            inputAdornment={{
               startAdornment: (
                 <InputAdornment position="start">
                   <Person color="action" />
@@ -104,12 +108,12 @@ const Signup = () => {
             label="Email"
             name="email"
             type="email"
-            value={form.email}
-            onChange={handleChange}
+            value={userData.email}
+            onChange={handleInputChange}
             fullWidth
             margin="normal"
             required
-            InputProps={{
+            inputAdornment={{
               startAdornment: (
                 <InputAdornment position="start">
                   <Email color="action" />
@@ -120,12 +124,12 @@ const Signup = () => {
           <TextField
             label="Username"
             name="username"
-            value={form.username}
-            onChange={handleChange}
+            value={userData.username}
+            onChange={handleInputChange}
             fullWidth
             margin="normal"
             required
-            InputProps={{
+            inputAdornment={{
               startAdornment: (
                 <InputAdornment position="start">
                   <AccountCircle color="action" />
@@ -137,12 +141,12 @@ const Signup = () => {
             label="Password"
             name="password"
             type="password"
-            value={form.password}
-            onChange={handleChange}
+            value={userData.password}
+            onChange={handleInputChange}
             fullWidth
             margin="normal"
             required
-            InputProps={{
+            inputAdornment={{
               startAdornment: (
                 <InputAdornment position="start">
                   <Lock color="action" />
@@ -154,12 +158,12 @@ const Signup = () => {
             label="Confirm Password"
             name="confirmPassword"
             type="password"
-            value={form.confirmPassword}
-            onChange={handleChange}
+            value={userData.confirmPassword}
+            onChange={handleInputChange}
             fullWidth
             margin="normal"
             required
-            InputProps={{
+            inputAdornment={{
               startAdornment: (
                 <InputAdornment position="start">
                   <Lock color="action" />
