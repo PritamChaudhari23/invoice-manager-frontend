@@ -1,6 +1,12 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+.app {
+  background: white;
+  font-family: sans-serif;
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: 15% auto;
+  grid-template-rows: 10% auto 10%;
+  grid-template-areas:
+    "header header"
+    "sidebar main"
+    "sidebar footer";
 }

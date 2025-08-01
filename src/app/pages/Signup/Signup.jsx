@@ -191,12 +191,7 @@ const Signup = () => {
         <Box mt={3} textAlign="center">
           <Typography variant="body2" color="text.secondary">
             Already have an account?{" "}
-            <Link
-              href="/login"
-              underline="hover"
-              color="primary"
-              fontWeight={500}
-            >
+            <Link href="/" underline="hover" color="primary" fontWeight={500}>
               Back to Login
             </Link>
           </Typography>
