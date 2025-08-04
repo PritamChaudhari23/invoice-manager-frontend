@@ -77,12 +77,14 @@ const Login = () => {
             fullWidth
             margin="normal"
             required
-            inputAdornment={{
-              startAdornment: (
-                <InputAdornment position="start">
-                  <AccountCircle color="action" />
-                </InputAdornment>
-              ),
+            slotProps={{
+              input: {
+                startAdornment: (
+                  <InputAdornment position="start">
+                    <AccountCircle />
+                  </InputAdornment>
+                ),
+              },
             }}
           />
           <TextField
@@ -94,12 +96,14 @@ const Login = () => {
             fullWidth
             margin="normal"
             required
-            inputAdornment={{
-              startAdornment: (
-                <InputAdornment position="start">
-                  <Lock color="action" />
-                </InputAdornment>
-              ),
+            slotProps={{
+              input: {
+                startAdornment: (
+                  <InputAdornment position="start">
+                    <Lock color="action" />
+                  </InputAdornment>
+                ),
+              },
             }}
           />
           <Button

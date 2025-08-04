@@ -43,6 +43,7 @@ const Signup = () => {
       alignItems="center"
       minHeight="100vh"
       bgcolor="linear-gradient(135deg, #e0eafc 0%, #cfdef3 100%)"
+      sx={{ padding: 2 }}
     >
       <Paper
         elevation={6}
@@ -80,12 +81,14 @@ const Signup = () => {
             fullWidth
             margin="normal"
             required
-            inputAdornment={{
-              startAdornment: (
-                <InputAdornment position="start">
-                  <Person color="action" />
-                </InputAdornment>
-              ),
+            slotProps={{
+              input: {
+                startAdornment: (
+                  <InputAdornment position="start">
+                    <Person color="action" />
+                  </InputAdornment>
+                ),
+              },
             }}
           />
           <TextField
@@ -96,12 +99,14 @@ const Signup = () => {
             fullWidth
             margin="normal"
             required
-            inputAdornment={{
-              startAdornment: (
-                <InputAdornment position="start">
-                  <Person color="action" />
-                </InputAdornment>
-              ),
+            slotProps={{
+              input: {
+                startAdornment: (
+                  <InputAdornment position="start">
+                    <Person color="action" />
+                  </InputAdornment>
+                ),
+              },
             }}
           />
           <TextField
@@ -113,12 +118,14 @@ const Signup = () => {
             fullWidth
             margin="normal"
             required
-            inputAdornment={{
-              startAdornment: (
-                <InputAdornment position="start">
-                  <Email color="action" />
-                </InputAdornment>
-              ),
+            slotProps={{
+              input: {
+                startAdornment: (
+                  <InputAdornment position="start">
+                    <Email color="action" />
+                  </InputAdornment>
+                ),
+              },
             }}
           />
           <TextField
@@ -129,12 +136,14 @@ const Signup = () => {
             fullWidth
             margin="normal"
             required
-            inputAdornment={{
-              startAdornment: (
-                <InputAdornment position="start">
-                  <AccountCircle color="action" />
-                </InputAdornment>
-              ),
+            slotProps={{
+              input: {
+                startAdornment: (
+                  <InputAdornment position="start">
+                    <AccountCircle color="action" />
+                  </InputAdornment>
+                ),
+              },
             }}
           />
           <TextField
@@ -146,12 +155,14 @@ const Signup = () => {
             fullWidth
             margin="normal"
             required
-            inputAdornment={{
-              startAdornment: (
-                <InputAdornment position="start">
-                  <Lock color="action" />
-                </InputAdornment>
-              ),
+            slotProps={{
+              input: {
+                startAdornment: (
+                  <InputAdornment position="start">
+                    <Lock color="action" />
+                  </InputAdornment>
+                ),
+              },
             }}
           />
           <TextField
@@ -163,12 +174,14 @@ const Signup = () => {
             fullWidth
             margin="normal"
             required
-            inputAdornment={{
-              startAdornment: (
-                <InputAdornment position="start">
-                  <Lock color="action" />
-                </InputAdornment>
-              ),
+            slotProps={{
+              input: {
+                startAdornment: (
+                  <InputAdornment position="start">
+                    <Lock color="action" />
+                  </InputAdornment>
+                ),
+              },
             }}
           />
           <Button

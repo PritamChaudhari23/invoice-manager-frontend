@@ -23,6 +23,62 @@ const InvoiceAddEdit = Loadable(
 const InvoiceDetails = Loadable(
   lazy(() => import("../app/pages/Invoice/InvoiceDetails"))
 );
+const Clients = Loadable(
+  lazy(() =>
+    import("../app/pages/DummyPages").then((module) => ({
+      default: module.Clients,
+    }))
+  )
+);
+const Estimates = Loadable(
+  lazy(() =>
+    import("../app/pages/DummyPages").then((module) => ({
+      default: module.Estimates,
+    }))
+  )
+);
+const Payments = Loadable(
+  lazy(() =>
+    import("../app/pages/DummyPages").then((module) => ({
+      default: module.Payments,
+    }))
+  )
+);
+const Expenses = Loadable(
+  lazy(() =>
+    import("../app/pages/DummyPages").then((module) => ({
+      default: module.Expenses,
+    }))
+  )
+);
+const Profile = Loadable(
+  lazy(() =>
+    import("../app/pages/DummyPages").then((module) => ({
+      default: module.Profile,
+    }))
+  )
+);
+const Settings = Loadable(
+  lazy(() =>
+    import("../app/pages/DummyPages").then((module) => ({
+      default: module.Settings,
+    }))
+  )
+);
+const Help = Loadable(
+  lazy(() =>
+    import("../app/pages/DummyPages").then((module) => ({
+      default: module.Help,
+    }))
+  )
+);
+const Logout = Loadable(
+  lazy(() =>
+    import("../app/pages/DummyPages").then((module) => ({
+      default: module.Logout,
+    }))
+  )
+);
 
 export const routes = [
   { path: "/", element: <Login /> },
@@ -37,4 +93,12 @@ export const routes = [
       { path: "/:id", element: <InvoiceDetails /> },
     ],
   },
+  { path: "/clients", element: <ProtectedRoute element={<Clients />} /> },
+  { path: "/estimates", element: <ProtectedRoute element={<Estimates />} /> },
+  { path: "/payments", element: <ProtectedRoute element={<Payments />} /> },
+  { path: "/expenses", element: <ProtectedRoute element={<Expenses />} /> },
+  { path: "/profile", element: <ProtectedRoute element={<Profile />} /> },
+  { path: "/settings", element: <ProtectedRoute element={<Settings />} /> },
+  { path: "/help", element: <ProtectedRoute element={<Help />} /> },
+  { path: "/logout", element: <ProtectedRoute element={<Logout />} /> },
 ];
