@@ -1,16 +1,16 @@
-import AppPage from "../../components/AppPage/AppPage";
+import AppPage from "../components/AppPage/AppPage";
 import Typography from "@mui/material/Typography";
 
-const InvoiceAddEdit = ({ mode }) => {
+const NotFound = () => {
   return (
     <AppPage title={""} description={""}>
       <div>
         <Typography variant="subtitle1" gutterBottom>
-          Invoice AddEdit
+          PAGE NOT FOUND
         </Typography>
       </div>
     </AppPage>
   );
 };
 
-export default InvoiceAddEdit;
+export default NotFound;
