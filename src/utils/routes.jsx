@@ -88,9 +88,18 @@ export const routes = [
     path: "/invoices",
     element: <ProtectedRoute element={<InvoiceList />} />,
     children: [
-      { path: "/add", element: <InvoiceAddEdit mode="ADD" /> },
-      { path: "/:id/edit", element: <InvoiceAddEdit mode="EDIT" /> },
-      { path: "/:id", element: <InvoiceDetails /> },
+      {
+        path: "add",
+        element: <ProtectedRoute element={<InvoiceAddEdit mode="ADD" />} />,
+      },
+      {
+        path: ":id/edit",
+        element: <ProtectedRoute element={<InvoiceAddEdit mode="EDIT" />} />,
+      },
+      {
+        path: ":id",
+        element: <ProtectedRoute element={<InvoiceDetails />} />,
+      },
     ],
   },
   { path: "/clients", element: <ProtectedRoute element={<Clients />} /> },

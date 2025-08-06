@@ -1,5 +1,6 @@
 import AppPage from "../../components/AppPage/AppPage";
 import Typography from "@mui/material/Typography";
+import { Outlet } from "react-router-dom";
 
 const InvoiceList = () => {
   return (
@@ -9,6 +10,7 @@ const InvoiceList = () => {
           Invoice List
         </Typography>
       </div>
+      <Outlet />
     </AppPage>
   );
 };
