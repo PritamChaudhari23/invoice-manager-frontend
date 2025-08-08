@@ -4,7 +4,10 @@ const BASE_URL = "http://localhost:8000/api/v1";
 
 // Request handler
 const requestHandler = (request) => {
-  // You can modify request headers or config here
+  const token = localStorage.getItem("authToken"); // Get token from storage
+  if (token) {
+    request.headers.Authorization = `Bearer ${token}`; // Attach token
+  }
   return request;
 };
 
