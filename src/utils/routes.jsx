@@ -14,6 +14,9 @@ const Signup = Loadable(lazy(() => import("../app/pages/Signup/Signup")));
 const Dashboard = Loadable(
   lazy(() => import("../app/pages/Dashboard/Dashboard"))
 );
+const InvoiceLayout = Loadable(
+  lazy(() => import("../app/pages/Invoice/InvoiceLayout"))
+);
 const InvoiceList = Loadable(
   lazy(() => import("../app/pages/Invoice/InvoiceList"))
 );
@@ -86,19 +89,23 @@ export const routes = [
   { path: "/dashboard", element: <ProtectedRoute element={<Dashboard />} /> },
   {
     path: "/invoices",
-    element: <ProtectedRoute element={<InvoiceList />} />,
+    element: <ProtectedRoute element={<InvoiceLayout />} />,
     children: [
       {
+        path: "",
+        element: <InvoiceList />,
+      },
+      {
         path: "add",
-        element: <ProtectedRoute element={<InvoiceAddEdit mode="ADD" />} />,
+        element: <InvoiceAddEdit mode="ADD" />,
       },
       {
         path: ":id/edit",
-        element: <ProtectedRoute element={<InvoiceAddEdit mode="EDIT" />} />,
+        element: <InvoiceAddEdit mode="EDIT" />,
       },
       {
         path: ":id",
-        element: <ProtectedRoute element={<InvoiceDetails />} />,
+        element: <InvoiceDetails />,
       },
     ],
   },

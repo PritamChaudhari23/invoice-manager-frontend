@@ -1,16 +1,18 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, useRoutes } from "react-router-dom";
 import { routes } from "../utils/routes";
 import { AuthProvider } from "./components/Auth/AuthProvider";
+
+// Flatten the routes structure so that children routes are not nested
+function AppRoutes() {
+  const element = useRoutes(routes);
+  return element;
+}
 
 function App() {
   return (
     <AuthProvider>
       <BrowserRouter>
-        <Routes>
-          {routes.map((route, index) => (
-            <Route key={index} path={route.path} element={route.element} />
-          ))}
-        </Routes>
+        <AppRoutes />
       </BrowserRouter>
     </AuthProvider>
   );

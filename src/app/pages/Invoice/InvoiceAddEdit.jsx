@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { Grid } from "@mui/material";
-import AppPage from "../../components/AppPage/AppPage";
 import Typography from "@mui/material/Typography";
 
 const InvoiceAddEdit = ({ mode }) => {
@@ -26,12 +25,10 @@ const InvoiceAddEdit = ({ mode }) => {
   };
 
   return (
-    <AppPage title={""} description={""}>
-      <div>
-        <Typography variant="subtitle1" gutterBottom>
-          Invoice AddEdit
-        </Typography>
-      </div>
+    <div>
+      <Typography variant="subtitle1" gutterBottom>
+        Invoice AddEdit
+      </Typography>
       <form onSubmit={handleFormSubmit}>
         <Grid container spacing={2}>
           <Grid item xs={12}>
@@ -102,7 +99,7 @@ const InvoiceAddEdit = ({ mode }) => {
           </Grid>
         </Grid>
       </form>
-    </AppPage>
+    </div>
   );
 };
 
