@@ -1,11 +1,40 @@
 import Typography from "@mui/material/Typography";
+import { DataGrid } from "@mui/x-data-grid";
+import { Box } from "@mui/material";
 
 const InvoiceList = () => {
+  const columns = [
+    { field: "id", headerName: "ID", width: 70 },
+    { field: "clientName", headerName: "Client Name", flex: 1 },
+    { field: "amount", headerName: "Amount", type: "number", flex: 1 },
+    { field: "service", headerName: "Service", flex: 1 },
+    { field: "paymentMethod", headerName: "Payment Method", flex: 1 },
+    { field: "invoiceDate", headerName: "Invoice Date", type: "date", flex: 1 },
+    {
+      field: "isPaid",
+      headerName: "Paid",
+      type: "boolean",
+      flex: 1,
+      valueFormatter: (params) => (params.value ? "Yes" : "No"),
+    },
+  ];
+
+  const rows = [];
+
   return (
     <div>
       <Typography variant="subtitle1" gutterBottom>
         Invoice List
       </Typography>
+      <Box sx={{ height: 400, width: "100%" }}>
+        <DataGrid
+          rows={rows}
+          columns={columns}
+          pageSize={5}
+          rowsPerPageOptions={[5]}
+          checkboxSelection
+        />
+      </Box>
     </div>
   );
 };
