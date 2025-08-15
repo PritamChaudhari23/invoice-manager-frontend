@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   Grid,
   Typography,
@@ -15,6 +15,8 @@ import {
 } from "@mui/material";
 import { DatePicker, LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterMoment } from "@mui/x-date-pickers/AdapterMoment";
+import moment from "moment";
+import { createInvoice } from "../../../network/invoiceapi";
 
 const InvoiceAddEdit = ({ mode }) => {
   const initialState = {
@@ -28,9 +30,25 @@ const InvoiceAddEdit = ({ mode }) => {
 
   const [invoice, setInvoice] = useState(initialState);
 
-  const handleFormSubmit = (event) => {
+  useEffect(() => {
+    if (mode === "edit") {
+    } // Logic to fetch existing invoice data for editing can be added here
+  }, [mode]);
+
+  const handleFormSubmit = async (event) => {
     event.preventDefault();
     console.log("INVOICE DATA:", invoice);
+    let formattedDate = null;
+    if (invoice.invoiceDate) {
+      formattedDate = moment(invoice.invoiceDate).format("YYYY-MM-DD");
+    }
+    const invoiceData = {
+      ...invoice,
+      invoiceDate: formattedDate,
+    };
+    await createInvoice(invoiceData);
+    setInvoice(initialState); // Reset form after submission
+    console.log("INVOICE DATA:", invoiceData);
   };
 
   const handleInputChange = (event) => {
@@ -111,49 +129,45 @@ const InvoiceAddEdit = ({ mode }) => {
 
           {/* Payment Method + Payment Status */}
 
-          <Grid item xs={12}>
-            <Grid container spacing={2}>
-              {/* Payment Method Dropdown */}
-              <Grid item xs={6}>
-                <FormControl fullWidth required>
-                  <InputLabel>Payment Method</InputLabel>
-                  <Select
-                    name="paymentMethod"
-                    value={invoice.paymentMethod}
-                    onChange={handleInputChange}
-                    label="Payment Method"
-                    fullWidth
-                  >
-                    <MenuItem value="cash">Cash</MenuItem>
-                    <MenuItem value="card">Card</MenuItem>
-                    <MenuItem value="upi">UPI</MenuItem>
-                  </Select>
-                </FormControl>
-              </Grid>
+          {/* Payment Method Dropdown */}
+          <Grid item xs={6}>
+            <FormControl fullWidth required>
+              <InputLabel>Payment Method</InputLabel>
+              <Select
+                name="paymentMethod"
+                value={invoice.paymentMethod}
+                onChange={handleInputChange}
+                label="Payment Method"
+                fullWidth
+              >
+                <MenuItem value="cash">Cash</MenuItem>
+                <MenuItem value="card">Card</MenuItem>
+                <MenuItem value="upi">UPI</MenuItem>
+              </Select>
+            </FormControl>
+          </Grid>
 
-              {/* Payment Status (Radio Buttons) */}
-              <Grid item xs={6}>
-                <FormControl component="fieldset" fullWidth>
-                  <RadioGroup
-                    name="isPaid"
-                    value={invoice.isPaid.toString()}
-                    onChange={handleRadioChange}
-                    row
-                  >
-                    <FormControlLabel
-                      value="true"
-                      control={<Radio />}
-                      label="Paid"
-                    />
-                    <FormControlLabel
-                      value="false"
-                      control={<Radio />}
-                      label="Unpaid"
-                    />
-                  </RadioGroup>
-                </FormControl>
-              </Grid>
-            </Grid>
+          {/* Payment Status (Radio Buttons) */}
+          <Grid item xs={6}>
+            <FormControl component="fieldset" fullWidth>
+              <RadioGroup
+                name="isPaid"
+                value={invoice.isPaid.toString()}
+                onChange={handleRadioChange}
+                row
+              >
+                <FormControlLabel
+                  value="true"
+                  control={<Radio />}
+                  label="Paid"
+                />
+                <FormControlLabel
+                  value="false"
+                  control={<Radio />}
+                  label="Unpaid"
+                />
+              </RadioGroup>
+            </FormControl>
           </Grid>
 
           {/* Submit Button */}
