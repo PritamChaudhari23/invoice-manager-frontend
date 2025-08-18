@@ -1,8 +1,31 @@
+import { useState, useEffect } from "react";
 import Typography from "@mui/material/Typography";
 import { DataGrid } from "@mui/x-data-grid";
 import { Box } from "@mui/material";
+import { getInvoices } from "../../../network/invoiceapi";
 
 const InvoiceList = () => {
+  const [rows, setRows] = useState([]);
+
+  useEffect(() => {
+    getInvoices().then((data) => {
+      if (data && data.length > 0) {
+        const formattedRows = data.map((invoice, index) => ({
+          id: invoice._id || index, // Use _id or index as a fallback
+          clientName: invoice.clientName,
+          amount: invoice.amount,
+          service: invoice.service,
+          paymentMethod: invoice.paymentMethod,
+          invoiceDate: new Date(invoice.invoiceDate),
+          isPaid: invoice.isPaid,
+        }));
+        setRows(formattedRows);
+      } else {
+        setRows([]);
+      }
+    });
+  }, []);
+
   const columns = [
     { field: "id", headerName: "ID", width: 70 },
     { field: "clientName", headerName: "Client Name", flex: 1 },
@@ -18,8 +41,6 @@ const InvoiceList = () => {
       valueFormatter: (params) => (params.value ? "Yes" : "No"),
     },
   ];
-
-  const rows = [];
 
   return (
     <div>

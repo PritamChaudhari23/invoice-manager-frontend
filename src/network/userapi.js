@@ -9,6 +9,10 @@ const login = async (credentials) => {
     return { success: true, token };
   } catch (error) {
     console.log("Login error: ", error);
+    return {
+      success: false,
+      error: error.response ? error.response.data : "Network Error",
+    };
   }
 };
 
@@ -18,6 +22,10 @@ const signup = async (userdata) => {
     return { success: true, data: response.data };
   } catch (error) {
     console.log("Registration error: ", error);
+    return {
+      success: false,
+      error: error.response ? error.response.data : "Network Error",
+    };
   }
 };
 

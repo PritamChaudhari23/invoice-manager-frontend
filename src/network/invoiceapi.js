@@ -2,7 +2,7 @@ import axiosInstance from "./interceptor";
 
 export const createInvoice = async (invoice) => {
   try {
-    const response = await axiosInstance.post("/addinvoice", invoice);
+    const response = await axiosInstance.post("/invoice/addinvoice", invoice);
     return response.data;
   } catch (error) {
     console.log(error);
@@ -12,7 +12,10 @@ export const createInvoice = async (invoice) => {
 export const updateInvoiceReq = async (id, invoice) => {
   //   delete invoice._id;
   try {
-    const response = await axiosInstance.put(`/invoices/${id}`, invoice);
+    const response = await axiosInstance.put(
+      `/invoice/invoices/${id}`,
+      invoice
+    );
     return response.data;
   } catch (error) {
     console.log(error);
@@ -21,7 +24,7 @@ export const updateInvoiceReq = async (id, invoice) => {
 
 export const getInvoiceDetails = async (id) => {
   try {
-    const response = await axiosInstance.get(`/invoices/${id}`);
+    const response = await axiosInstance.get(`/invoice/invoices/${id}`);
     return response.data;
   } catch (error) {
     console.log(error);
@@ -30,7 +33,7 @@ export const getInvoiceDetails = async (id) => {
 
 export const getInvoices = async () => {
   try {
-    const response = await axiosInstance.get("/invoices");
+    const response = await axiosInstance.get("/invoice/invoices");
     return response.data;
   } catch (error) {
     console.log(error);
@@ -39,7 +42,7 @@ export const getInvoices = async () => {
 
 export const deleteInvoiceReq = async (id) => {
   try {
-    const response = await axiosInstance.delete(`/invoices/${id}`);
+    const response = await axiosInstance.delete(`/invoice/invoices/${id}`);
     return response.data;
   } catch (error) {
     console.log(error);

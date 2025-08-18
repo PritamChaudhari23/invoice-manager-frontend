@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import {
   Box,
   Button,
@@ -13,6 +13,7 @@ import Email from "@mui/icons-material/Email";
 import AccountCircle from "@mui/icons-material/AccountCircle";
 import Lock from "@mui/icons-material/Lock";
 import { signup } from "../../../network/userapi";
+import { useNavigate } from "react-router-dom";
 
 const Signup = () => {
   const initialState = {
@@ -24,16 +25,24 @@ const Signup = () => {
     confirmPassword: "",
   };
   const [userData, setUserData] = useState(initialState);
+  const navigate = useNavigate();
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
     setUserData({ ...userData, [name]: value });
   };
 
-  const handleFormSubmit = (event) => {
+  const handleFormSubmit = async (event) => {
     event.preventDefault();
     console.log(userData);
-    signup(userData);
+    let response = await signup(userData);
+    if (response.success) {
+      console.log("Signup successful: ", response);
+      navigate("/");
+    } else {
+      console.error("Login failed:", response.error);
+      alert(`Login failed: ${response.error}`);
+    }
   };
 
   return (

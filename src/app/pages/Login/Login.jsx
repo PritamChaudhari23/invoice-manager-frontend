@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import {
   Box,
   Button,
@@ -11,6 +11,7 @@ import {
 import AccountCircle from "@mui/icons-material/AccountCircle";
 import Lock from "@mui/icons-material/Lock";
 import { login } from "../../../network/userapi";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
   const initialState = {
@@ -19,13 +20,21 @@ const Login = () => {
   };
 
   const [userCredentials, setUserCredentials] = useState(initialState);
+  const navigate = useNavigate();
 
-  const handleFormSubmit = (event) => {
+  const handleFormSubmit = async (event) => {
     event.preventDefault();
     console.log(
       `USERNAME: ${userCredentials.username} & Password: ${userCredentials.password}`
     );
-    login(userCredentials);
+    let response = await login(userCredentials);
+    if (response.success) {
+      console.log("Login successful, token:", response.token);
+      navigate("/dashboard");
+    } else {
+      console.error("Login failed:", response.error);
+      alert(`Login failed: ${response.error}`);
+    }
   };
 
   const handleInputChange = (event) => {
